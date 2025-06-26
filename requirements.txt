@@ -5,3 +5,4 @@ matplotlib
 mplsoccer
 openpyxl
 requests
+git+https://github.com/RobMullan/football-data.git#egg=soccerdata
