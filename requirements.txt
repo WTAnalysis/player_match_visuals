@@ -6,3 +6,5 @@ mplsoccer
 openpyxl
 requests
 soccerdata
+beautifulsoup4
+lxml
