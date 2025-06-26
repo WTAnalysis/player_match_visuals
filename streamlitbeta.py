@@ -787,7 +787,7 @@ if matchlink and playername:
             event_map = {}
         qualifiers = pd.read_excel("Opta Qualifiers.xlsx")
         #teamdata = pd.read_csv(r"C:\Users\will-\OneDrive\Documents\WT Analysis\Scoresway\Team Log\teamlog.csv")
-        event_map = dict(zip(Events["Code"], Events["Event"]))
+        event_map = dict(zip(events["Code"], events["Event"]))
         qualifier_map = dict(zip(qualifiers["Code"], qualifiers["Qualifier"]))
         df = df.iloc[:, :100]
         if 'assist' not in df.columns:
