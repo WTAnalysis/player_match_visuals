@@ -1944,7 +1944,6 @@ if matchlink and playername:
         playertouchmap = playertouchmap.loc[playertouchmap['typeId']!='Player off']
         ## IMPORT RELEVANT LIBRARIES
 
-        import soccerdata as sd
         import pandas as pd
         import numpy as np
         import mplsoccer as mpl
