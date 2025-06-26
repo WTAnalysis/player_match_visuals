@@ -26,7 +26,6 @@ st.title("WT Analysis - Player Match Visuals")
 
 # Inputs
 matchlink = st.text_input("Enter Match Link")
-playername = st.text_input("Enter Player Name")
 
 if matchlink and playername:
     st.info(f"Analyzing {playername} in match {matchlink}...")
@@ -1889,7 +1888,14 @@ if matchlink and playername:
 
         # Output the result
         print(f"Color properties for {league}: {league_colors_properties}")
+        player_list = sorted(starting_lineups['player_name'].dropna().unique())
 
+# Show player dropdown in sidebar
+        playername = st.selectbox("Select Player Name", player_list)
+
+# Info message after selection
+        if playername:
+            st.info(f"Analyzing {playername} in match {matchlink}...")
         # Example usage for visuals
         TextColor = league_colors_properties["TextColor"]
         BackgroundColor = league_colors_properties["BackgroundColor"]
