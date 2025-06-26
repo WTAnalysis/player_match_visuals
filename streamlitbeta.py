@@ -22,7 +22,7 @@ import matplotlib.patheffects as path_effects
 import matplotlib.patches as patches
 
 st.set_page_config(page_title="WT Analysis Tool", layout="wide")
-st.title("WT Analysis Tool")
+st.title("WT Analysis - Player Match Visuals")
 
 # Inputs
 matchlink = st.text_input("Enter Match Link")
