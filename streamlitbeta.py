@@ -1915,6 +1915,7 @@ if matchlink:
         anderson = anderson.loc[anderson['typeId']!='Out']
         anderson = anderson.loc[anderson['typeId']!='Player off']
         anderson = anderson.loc[anderson['typeId']!='Player on']
+        anderson = anderson[~((anderson['x'] == 0) & (anderson['y'] == 0))]
         prf3comp = anderson.loc[(anderson['outcome']=='Successful') & (anderson['typeId']=='Pass')]
         prf3incomp = anderson.loc[(anderson['outcome']=='Unsuccessful') & (anderson['typeId']=='Pass') ]
         shotassist = anderson.loc[anderson['keyPass']==1]
