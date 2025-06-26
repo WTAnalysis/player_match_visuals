@@ -770,7 +770,6 @@ if matchlink and playername:
         import pandas as pd
         
         # Show current directory contents for debugging
-        st.write("📂 Available files in directory:", os.listdir())
         
         # Safe load for 'Opta Events.xlsx'
         try:
