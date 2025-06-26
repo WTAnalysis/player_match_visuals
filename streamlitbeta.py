@@ -774,7 +774,7 @@ if matchlink and playername:
         # Safe load for 'Opta Events.xlsx'
         try:
             events = pd.read_excel("Opta Events.xlsx")
-            st.success("✅ Loaded 'Opta Events.xlsx'")
+            #st.success("✅ Loaded 'Opta Events.xlsx'")
             event_map = dict(zip(events["Code"], events["Event"]))
         except FileNotFoundError:
             st.error("❌ File 'Opta Events.xlsx' not found. Please upload or check your repo.")
