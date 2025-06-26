@@ -765,15 +765,26 @@ if matchlink and playername:
 
 
         #DF WORK
+        import os
+        import streamlit as st
         import pandas as pd
-        import numpy as np
-        st.write("📄 Files in working directory:", os.listdir())
-
+        
+        # Show current directory contents for debugging
+        st.write("📂 Available files in directory:", os.listdir())
+        
+        # Safe load for 'Opta Events.xlsx'
         try:
             events = pd.read_excel("Opta Events.xlsx")
-            st.success("✅ Opta Events.xlsx loaded successfully")
+            st.success("✅ Loaded 'Opta Events.xlsx'")
+            event_map = dict(zip(events["Code"], events["Event"]))
+        except FileNotFoundError:
+            st.error("❌ File 'Opta Events.xlsx' not found. Please upload or check your repo.")
+            events = pd.DataFrame()
+            event_map = {}
         except Exception as e:
-            st.error(f"❌ Could not load Opta Events.xlsx: {e}")
+            st.error(f"⚠️ Error loading 'Opta Events.xlsx': {e}")
+            events = pd.DataFrame()
+            event_map = {}
         qualifiers = pd.read_excel("Opta Qualifiers.xlsx")
         #teamdata = pd.read_csv(r"C:\Users\will-\OneDrive\Documents\WT Analysis\Scoresway\Team Log\teamlog.csv")
         event_map = dict(zip(Events["Code"], Events["Event"]))
