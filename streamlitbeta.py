@@ -2097,7 +2097,7 @@ if matchlink:
         #scatter15 = pitch_third.scatter(foulsl.x, foulsl.y, ax=axes[2], facecolor='red', edgecolor='red',marker='>', s=40)
         scatter3 = pitch_third.scatter(aerialt.x, aerialt.y, ax=axes[2], facecolor='green',edgecolor='green', marker='s', label='Aerial', s=40)
         scatter4 = pitch_third.scatter(aerialf.x, aerialf.y, ax=axes[2], facecolor='red',edgecolor='red', marker='s', s=40)
-        scatter5 = pitch_third.scatter(shotblocked.end_x, shotblocked.end_y, ax=axes[2], facecolor='green',edgecolor='green', marker='p', label='Attempts Blocked', s=40)
+        scatter5 = pitch_third.scatter(shotblocked.x, shotblocked.y, ax=axes[2], facecolor='green',edgecolor='green', marker='p', label='Attempts Blocked', s=40)
         scatter6 = pitch_third.scatter(ballrec.x, ballrec.y, ax=axes[2], facecolor='green',edgecolor='green', marker='d', label='Ball Recoveries', s=40)
         scatter7 = pitch_third.scatter(clearance.x, clearance.y, ax=axes[2], facecolor='green',edgecolor='green', marker='^', label='Clearance', s=40)
         scatter8 = pitch_third.scatter(takeont.x, takeont.y, ax=axes[2], facecolor='green',edgecolor='green', marker='P', label='Take On', s=40)
