@@ -2046,7 +2046,7 @@ if matchlink and playername:
         for index, row in playertouchmap.iterrows():
             x = row['y']  # Assuming 'y' is the column name for x-coordinate
             y = row['x']  # Assuming 'x' is the column name for y-coordinate
-            axes[1].plot(x, y, marker='o', markeredgecolor=SonarPass, markerfacecolor='none', markersize=5)  # Adjust marker size, color, and transparency as needed
+            axes[1].plot(x, y, marker='o', markeredgecolor=SonarCarry, markerfacecolor='none', markersize=5)  # Adjust marker size, color, and transparency as needed
 
         x_coords = playertouchmap['y']  # Assuming 'y' is the column name for x-coordinate
         y_coords = playertouchmap['x']  # Assuming 'x' is the column name for y-coordinate
