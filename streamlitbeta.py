@@ -1978,13 +1978,6 @@ if matchlink and playername:
         teamlogoid = teamdata.loc[teamdata['name'] == teamname, 'id'].values[0]
         opponentname2 = teamdata.loc[teamdata['name'] != teamname, 'name'].values[0]
 
-        playerimage = Image.open('C:\\Users\\will-\\OneDrive\\Documents\\WT Analysis\\Images\\elliotandersonengland.png')
-        #"C:\\Users\\will-\\OneDrive\\Documents\\WT Analysis\\Images\\morgangibbswhiteengland.png"
-        URL = "https://cdn5.wyscout.com/photos/competition/public/243_140x140.png"
-        # EFFIONG https://cdn5.wyscout.com/photos/players/public/g144828_100x130.png
-        leagueimage = Image.open(urlopen(URL))
-        #leagueimage = Image.open('C:\\Users\\will-\\OneDrive\\Documents\\WT Analysis\\Logos\\BSMTrophy.png')
-
         URL = f"https://omo.akamai.opta.net/image.php?h=www.scoresway.com&sport=football&entity=team&description=badges&dimensions=150&id={teamlogoid}"
         # EFFIONG https://cdn5.wyscout.com/photos/players/public/g144828_100x130.png
         teamimage = Image.open(urlopen(URL))
