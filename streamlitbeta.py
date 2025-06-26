@@ -1974,6 +1974,7 @@ if matchlink:
         playercarry = playercarry.loc[playercarry['end_x']> 0]
         playercarry = playercarry.loc[playercarry['end_y']< 100]
         playercarry = playercarry.loc[playercarry['end_x']< 100]
+        playercarry = playercarry.loc[playercarry['end_x'] != 99.5]
         #playercarry = playercarry.loc[playercarry['x']!= 23.5]
 
         playercarry['y_diff'] = playercarry['y'] - playercarry['end_y']
