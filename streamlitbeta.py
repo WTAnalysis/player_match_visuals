@@ -27,8 +27,8 @@ st.title("WT Analysis - Player Match Visuals")
 # Inputs
 matchlink = st.text_input("Enter Match Link")
 
-if matchlink and playername:
-    st.info(f"Analyzing {playername} in match {matchlink}...")
+if matchlink:
+    st.info(f"Analyzing {matchlink}...")
 
     url = f'https://api.performfeeds.com/soccerdata/matchevent/ft1tiv1inq7v1sk3y9tv12yh5/{matchlink}?_rt=c&_lcl=en&_fmt=jsonp&sps=widgets&_clbk=W351bc3acc0d0c4e5b871ac99dfbfeb44bb58ba1dc'
     headers = {
