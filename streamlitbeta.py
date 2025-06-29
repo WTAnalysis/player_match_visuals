@@ -1922,8 +1922,8 @@ if matchlink:
             goal_time = goals['timeMin']
         
             # Prepare halftime and fulltime
-            halftime = df[df['periodId'] == 2]['timeMin'].max()
-            fulltime = df[df['periodId'] == 3]['timeMin'].max()
+            halftime = df[df['periodId'] == 1]['timeMin'].max()
+            fulltime = df[df['periodId'] == 2]['timeMin'].max()
         
             # Load team logos and football image (football.png must be in repo directory)
             hometeamlogo = teamdata.iloc[0, 0]
