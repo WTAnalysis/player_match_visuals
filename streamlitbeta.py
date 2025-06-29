@@ -1979,7 +1979,7 @@ if matchlink:
             ax.add_artist(ab_away)
             
             imagebox_logo = OffsetImage(wtaimaged, zoom=0.5, alpha=0.1)
-            ab_logo = AnnotationBbox(imagebox_home, (5, -1), frameon=False)
+            ab_logo = AnnotationBbox(imagebox_logo, (5, -1), frameon=False)
             ax.add_artist(ab_logo)
                
             st.pyplot(fig)        ## STEP 8 - sendings off
