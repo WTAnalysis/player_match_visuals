@@ -44,8 +44,18 @@ if matchlink:
         st.error("Failed to fetch match data.")
     else:
         # Clean JSONP
-        cleaned_text = re.sub(r'^.*?\(', '', response.text)[:-1]
-        data = json.loads(cleaned_text)
+# Clean JSONP safely
+        try:
+            json_str_match = re.search(r'\((.*)\)', response.text)
+            if json_str_match:
+                json_str = json_str_match.group(1)
+                data = json.loads(json_str)
+            else:
+                st.error("Failed to extract JSON from API response. The response format may have changed.")
+                st.stop()
+        except json.JSONDecodeError as e:
+            st.error(f"JSON decoding failed: {e}")
+            st.stop()
         import requests
         import json
         import re
