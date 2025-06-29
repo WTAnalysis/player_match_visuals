@@ -1906,7 +1906,7 @@ if matchlink:
             pivot_df['rolling_avg_score_difference'] = pivot_df['score_difference'].rolling(window=5, min_periods=1).mean()
         
             # Prepare goal times
-            goals = df.loc[df['typeId']=='Goal']
+            goals = df[df['typeId'].isin(['Goal', 'Own Goal'])]
             goal_time = goals['timeMin']
         
             # Prepare halftime and fulltime
