@@ -1958,9 +1958,9 @@ if matchlink:
             # Halftime and fulltime lines
             if pd.notna(halftime):
                 ax.axvline(x=halftime, color='green', linestyle='--', linewidth=1)
-            if pd.notna(fulltime):
+            if pd.notna(fulltime) and fulltime >= 90:
                 ax.axvline(x=fulltime, color='green', linestyle='--', linewidth=1)
-        
+
             ax.set_title(f'{teamname} v {opponentname} Match Momentum')
             ax.set_xlabel('Minute')
             ax.set_ylabel('')
