@@ -20,7 +20,9 @@ from mplsoccer import Pitch, VerticalPitch
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
 import matplotlib.patches as patches
+from PIL import Image
 
+wtaimaged = Image.open("wtatransnew.png")
 st.set_page_config(page_title="WT Analysis Tool", layout="wide")
 st.title("WT Analysis - Player Match Visuals")
 
@@ -2068,9 +2070,7 @@ if matchlink:
         URL = f"https://omo.akamai.opta.net/image.php?h=www.scoresway.com&sport=football&entity=team&description=badges&dimensions=150&id={teamlogoid}"
         # EFFIONG https://cdn5.wyscout.com/photos/players/public/g144828_100x130.png
         teamimage = Image.open(urlopen(URL))
-        from PIL import Image
 
-        wtaimaged = Image.open("wtatransnew.png")
         #teamimage = Image.open('C:\\Users\\will-\\OneDrive\\Documents\\WT Analysis\\Images\\premlogos\\forest2.png')
         from matplotlib.offsetbox import OffsetImage, AnnotationBbox
         import matplotlib.pyplot as plt
