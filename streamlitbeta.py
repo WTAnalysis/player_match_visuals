@@ -1978,7 +1978,7 @@ if matchlink:
             ab_away = AnnotationBbox(imagebox_away, (pivot_df['timeMin'].max()-5, -1), frameon=False)
             ax.add_artist(ab_away)
             
-            imagebox_logo = OffsetImage(wtaimaged, zoom=0.5, alpha=0.1)
+            imagebox_logo = OffsetImage(wtaimaged, zoom=0.1, alpha=0.25)
             ab_logo = AnnotationBbox(imagebox_logo, (5, -1), frameon=False)
             ax.add_artist(ab_logo)
                
