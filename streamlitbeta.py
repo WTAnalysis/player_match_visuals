@@ -385,14 +385,14 @@ if matchlink:
             halftime = df[df['periodId'] == 2]['timeMin'].max()
             fulltime = df[df['periodId'] == 3]['timeMin'].max()
         
-            # Load team logos
+            # Load team logos and football image (football.png must be in repo directory)
             hometeamlogo = teamdata.iloc[0, 0]
             awayteamlogo = teamdata.iloc[1, 0]
             HOMEURL = f"https://omo.akamai.opta.net/image.php?h=www.scoresway.com&sport=football&entity=team&description=badges&dimensions=150&id={hometeamlogo}"
             AWAYURL = f"https://omo.akamai.opta.net/image.php?h=www.scoresway.com&sport=football&entity=team&description=badges&dimensions=150&id={awayteamlogo}"
             homeimage = Image.open(urlopen(HOMEURL))
             awayimage = Image.open(urlopen(AWAYURL))
-            footballimage = Image.open('football.png')  # Uses football.png from repo directory
+            footballimage = Image.open('football.png')
         
             # Create plot
             fig, ax = plt.subplots(figsize=(10,6))
@@ -438,8 +438,7 @@ if matchlink:
             ab_away = AnnotationBbox(imagebox_away, (pivot_df['timeMin'].max()-5, -1), frameon=False)
             ax.add_artist(ab_away)
         
-            st.pyplot(fig)
-        ## STEP 8 - sendings off
+            st.pyplot(fig)        ## STEP 8 - sendings off
         cards = df[df['typeId'] == 17].copy()
         qualifier_cols = [col for col in cards.columns if 'qualifierId' in col]
 
