@@ -1267,7 +1267,7 @@ if matchlink:
 
         #### SHOTS
 
-        shotstaken = df[df['typeId'].isin(['Miss', 'Goal', 'Attempt Saved'])]
+        shotstaken = df[df['typeId'].isin(['Miss', 'Goal', 'Attempt Saved','Post'])]
 
         # Optionally reset the index
         shotstaken = shotstaken.reset_index(drop=True)
@@ -1283,6 +1283,8 @@ if matchlink:
         shotstaken.loc[shotstaken['typeId'] == 'Goal', 'xT_value'] = 0.95
         shotstaken.loc[shotstaken['typeId'] == 'Attempt Saved', 'xT_value'] = 0.2
         shotstaken.loc[shotstaken['typeId'] == 'Miss', 'xT_value'] = 0.05
+        shotstaken.loc[shotstaken['typeId'] == 'Post', 'xT_value'] = 0.15
+
         shotstaken.loc[shotstaken['shotblocked'] == 1, 'xT_value'] = 0.05
 
         # Optionally convert xT_value to float type
@@ -2041,7 +2043,7 @@ if matchlink:
         playercarry = anderson.loc[anderson['typeId']=='Carry']
 
         #shotblock = anderson.loc[(anderson['shot']==True) & (anderson['82']==True) & (anderson['player_name'] == playerrequest)]
-        shotoff = anderson.loc[(anderson['typeId'] == 'Miss')]
+        shotoff = anderson.loc[anderson['typeId'].isin(['Miss', 'Post'])]        
         shoton = anderson.loc[(anderson['typeId'] == 'Attempt Saved')]
         shotgoal = anderson.loc[(anderson['typeId'] == 'Goal')]
         playertouchmap = anderson.loc[anderson['typeId']!='Player on']
