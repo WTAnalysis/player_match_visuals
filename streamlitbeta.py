@@ -4,24 +4,23 @@
 # In[ ]:
 
 import os
+import warnings
+import json
+import re
 
 import streamlit as st
 import requests
-import json
-import re
 import matplotlib.pyplot as plt
-import warnings
-from pandas.errors import SettingWithCopyWarning
-warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 import pandas as pd
 import numpy as np
-from matplotlib.colors import to_rgba
+
+from matplotlib.colors import to_rgba, LinearSegmentedColormap
 from mplsoccer import Pitch, VerticalPitch
-from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
 import matplotlib.patches as patches
 from PIL import Image
 
+warnings.filterwarnings("ignore", category=pd.errors.SettingWithCopyWarning)
 wtaimaged = Image.open("wtatransnew.png")
 st.set_page_config(page_title="WT Analysis Tool", layout="wide")
 st.title("WT Analysis - Player Match Visuals")
