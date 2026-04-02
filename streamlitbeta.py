@@ -4,18 +4,20 @@
 # In[ ]:
 
 import os
-import warnings
-import json
-import re
 
 import streamlit as st
 import requests
+import json
+import re
 import matplotlib.pyplot as plt
+import warnings
+from pandas.errors import SettingWithCopyWarning
+warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 import pandas as pd
 import numpy as np
-
-from matplotlib.colors import to_rgba, LinearSegmentedColormap
+from matplotlib.colors import to_rgba
 from mplsoccer import Pitch, VerticalPitch
+from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
 import matplotlib.patches as patches
 from PIL import Image
@@ -58,7 +60,9 @@ if matchlink:
         import json
         import re
         import matplotlib.pyplot as plt
-
+        import warnings
+        from pandas.errors import SettingWithCopyWarning
+        warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
         import pandas as pd
         import numpy as np 
         from matplotlib.colors import to_rgba
@@ -151,51 +155,30 @@ if matchlink:
         import pandas as pd
         formation_rows = df[df['typeId'] == 34]
         formation_dfs = []
-
         for _, row in formation_rows.iterrows():
             row_data = row.to_dict()
             contestant_id = row_data.get('contestantId', None)
             qualifier_cols = [col for col in row.index if 'qualifierId' in col]
-
             formation_code = None
             player_ids = []
             squad_numbers = []
             formation_positions = []
-
             for col in qualifier_cols:
                 try:
                     qualifier_id = row[col]
                     value_col = df.columns[df.columns.get_loc(col) + 1]
                     value = row[value_col]
-
                     if qualifier_id == 130:
-                        formation_code = str(value).strip() if pd.notna(value) else None
+                        formation_code = value
                     elif qualifier_id == 30:
-                        player_ids = [x.strip() for x in str(value).split(',') if x.strip()]
+                        player_ids = str(value).split(',')
                     elif qualifier_id == 59:
-                        squad_numbers = [x.strip() for x in str(value).split(',') if x.strip()]
+                        squad_numbers = str(value).split(',')
                     elif qualifier_id == 131:
-                        formation_positions = [x.strip() for x in str(value).split(',') if x.strip()]
-                except Exception:
+                        formation_positions = str(value).split(',')
+                except:
                     continue
-
-            # Skip malformed rows with no players
-            if not player_ids:
-                continue
-
-            # Use player_ids as the base length and pad other fields to match
             num_players = len(player_ids)
-
-            if len(squad_numbers) < num_players:
-                squad_numbers.extend([None] * (num_players - len(squad_numbers)))
-            else:
-                squad_numbers = squad_numbers[:num_players]
-
-            if len(formation_positions) < num_players:
-                formation_positions.extend([None] * (num_players - len(formation_positions)))
-            else:
-                formation_positions = formation_positions[:num_players]
-
             data = {
                 'formation_code': [formation_code] * num_players,
                 'player_id': player_ids,
@@ -204,58 +187,34 @@ if matchlink:
                 'is_starter': ['yes' if i < 11 else 'no' for i in range(num_players)],
                 'contestant_id': [contestant_id] * num_players
             }
-
             formation_df = pd.DataFrame(data)
             formation_dfs.append(formation_df)
-
-        if formation_dfs:
-            formation_dfs = pd.concat(formation_dfs, ignore_index=True)
-        else:
-            formation_dfs = pd.DataFrame(columns=[
-                'formation_code',
-                'player_id',
-                'squad_number',
-                'formation_position',
-                'is_starter',
-                'contestant_id'
-            ])
-
+        formation_dfs = pd.concat(formation_dfs, ignore_index=True)
         player_lookup = df[['playerId', 'playerName']].dropna().drop_duplicates()
         formation_dfs['player_id'] = formation_dfs['player_id'].astype(str).str.strip()
         player_lookup['playerId'] = player_lookup['playerId'].astype(str).str.strip()
-
         formation_dfs = formation_dfs.merge(
             player_lookup,
             left_on='player_id',
             right_on='playerId',
             how='left'
         ).drop(columns=['playerId'])
-
         formation_dict['formation_code'] = formation_dict['formation_code'].astype(str).str.strip()
         formation_dict_melted = formation_dict.melt(
             id_vars='formation_code',
             var_name='formation_position',
             value_name='position'
         )
-
         formation_dfs = formation_dfs[formation_dfs['formation_position'].notna()].copy()
-        formation_dfs['formation_position'] = (
-            pd.to_numeric(formation_dfs['formation_position'], errors='coerce')
-        )
-        formation_dfs = formation_dfs[formation_dfs['formation_position'].notna()].copy()
-        formation_dfs['formation_position'] = formation_dfs['formation_position'].astype(int).astype(str)
-
+        formation_dfs['formation_position'] = formation_dfs['formation_position'].astype(float).astype(int).astype(str)
         formation_dict_melted['formation_position'] = formation_dict_melted['formation_position'].astype(str)
-
         formation_dfs = formation_dfs.merge(
             formation_dict_melted,
             on=['formation_code', 'formation_position'],
             how='left'
         )
-
         formation_dfs['match_id'] = matchlink
         formation_dfs.rename(columns={'playerName': 'player_name'}, inplace=True)
-
         starting_lineups = formation_dfs[
             [
                 'match_id',
