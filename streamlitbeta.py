@@ -174,25 +174,16 @@ if matchlink:
                         formation_positions = str(value).split(',')
                 except:
                     continue
-            player_ids = [str(x).strip() for x in player_ids if str(x).strip() and str(x).strip().lower() != 'nan']
-            squad_numbers = [str(x).strip() for x in squad_numbers]
-            formation_positions = [str(x).strip() for x in formation_positions]
-
-            if not player_ids:
-                continue
-
-            rows = []
-            for i, pid in enumerate(player_ids):
-                rows.append({
-                    'formation_code': formation_code,
-                    'player_id': pid,
-                    'squad_number': squad_numbers[i] if i < len(squad_numbers) else None,
-                    'formation_position': formation_positions[i] if i < len(formation_positions) else None,
-                    'is_starter': 'yes' if i < 11 else 'no',
-                    'contestant_id': contestant_id
-                })
-
-            formation_df = pd.DataFrame(rows)
+            num_players = len(player_ids)
+            data = {
+                'formation_code': [formation_code] * num_players,
+                'player_id': player_ids,
+                'squad_number': squad_numbers,
+                'formation_position': formation_positions,
+                'is_starter': ['yes' if i < 11 else 'no' for i in range(num_players)],
+                'contestant_id': [contestant_id] * num_players
+            }
+            formation_df = pd.DataFrame(data)
             formation_dfs.append(formation_df)
         formation_dfs = pd.concat(formation_dfs, ignore_index=True)
         player_lookup = df[['playerId', 'playerName']].dropna().drop_duplicates()
