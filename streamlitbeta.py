@@ -20,6 +20,13 @@ import matplotlib.patheffects as path_effects
 import matplotlib.patches as patches
 from PIL import Image
 
+try:
+    from pandas.errors import SettingWithCopyWarning
+except ImportError:
+    from pandas.core.common import SettingWithCopyWarning
+
+warnings.simplefilter("ignore", SettingWithCopyWarning)
+
 warnings.filterwarnings("ignore", category=pd.errors.SettingWithCopyWarning)
 wtaimaged = Image.open("wtatransnew.png")
 st.set_page_config(page_title="WT Analysis Tool", layout="wide")
