@@ -11,8 +11,6 @@ import json
 import re
 import matplotlib.pyplot as plt
 import warnings
-from pandas.errors import SettingWithCopyWarning
-warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
 import pandas as pd
 import numpy as np
 from matplotlib.colors import to_rgba
@@ -61,8 +59,6 @@ if matchlink:
         import re
         import matplotlib.pyplot as plt
         import warnings
-        from pandas.errors import SettingWithCopyWarning
-        warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
         import pandas as pd
         import numpy as np 
         from matplotlib.colors import to_rgba
