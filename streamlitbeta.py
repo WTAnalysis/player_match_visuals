@@ -175,9 +175,21 @@ if matchlink:
                 except:
                     continue
             num_players = len(player_ids)
+
+            # Keep original logic, but make list lengths safe for DataFrame creation
+            if len(squad_numbers) < num_players:
+                squad_numbers = squad_numbers + [None] * (num_players - len(squad_numbers))
+            else:
+                squad_numbers = squad_numbers[:num_players]
+
+            if len(formation_positions) < num_players:
+                formation_positions = formation_positions + [None] * (num_players - len(formation_positions))
+            else:
+                formation_positions = formation_positions[:num_players]
+
             data = {
                 'formation_code': [formation_code] * num_players,
-                'player_id': player_ids,
+                'player_id': player_ids[:num_players],
                 'squad_number': squad_numbers,
                 'formation_position': formation_positions,
                 'is_starter': ['yes' if i < 11 else 'no' for i in range(num_players)],
